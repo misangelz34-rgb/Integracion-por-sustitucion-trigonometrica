@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cálculo 2 · Integración — Sustitución trigonométrica</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --primary:#0f172a;
+      --accent:#059669;
+      --glass: rgba(15,23,42,0.04);
+      --radius:12px;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#ecfdf5);color:var(--primary);}
+    header{display:flex;align-items:center;gap:16px;padding:18px 24px;background:transparent}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#10b981);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:20px;box-shadow:0 6px 18px rgba(5,150,105,0.12)}
+    .title{font-size:18px;font-weight:600}
+    .subtitle{font-size:13px;color:var(--muted)}
+
+    .layout{display:grid;grid-template-columns:300px 1fr;gap:20px;padding:24px;max-width:1100px;margin:0 auto}
+    @media (max-width:880px){.layout{grid-template-columns:1fr;}
+      nav{order:2}
+      main{order:1}
+    }
+
+    nav{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(15,23,42,0.06);height:fit-content}
+    .toc{list-style:none;padding:0;margin:0}
+    .toc li{padding:8px 6px;border-radius:8px;margin-bottom:6px}
+    .toc a{display:block;color:var(--primary);text-decoration:none}
+    .toc a:hover{background:#ecfdf5;color:var(--accent)}
+
+    main{padding:22px;background:var(--card);border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.04);}
+    h1{margin:0 0 6px;font-size:28px}
+    .meta{color:var(--muted);margin-bottom:18px}
+    section{margin-bottom:28px}
+    h2{font-size:20px;margin:0 0 12px}
+    p{line-height:1.6;color:#263238}
+
+    .example{padding:12px;border-radius:10px;background:linear-gradient(180deg,#ffffff,#f0fdf4);border:1px solid rgba(2,6,23,0.03)}
+    .card{background:var(--glass);padding:14px;border-radius:10px;border:1px solid rgba(2,6,23,0.03)}
+
+    .math{background:#fff;border-left:4px solid #d1fae5;padding:8px 12px;border-radius:6px}
+    footer{max-width:1100px;margin:18px auto 50px;color:var(--muted);font-size:14px;padding:0 24px}
+  </style>
+  <script>
+    window.MathJax = {
+      tex: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      svg: {fontCache: 'global'}
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo">∫</div>
+      <div>
+        <div class="title">Apuntes · Integración</div>
+        <div class="subtitle">Sustitución trigonométrica — Cálculo II</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav>
+      <div class="toc-title"><strong>Contenido</strong></div>
+      <ul class="toc">
+        <li><a href="#introduccion">Introducción</a></li>
+        <li><a href="#casos">Casos principales</a></li>
+        <li><a href="#ejemplo1">Ejemplo 1 — $\sqrt{a^2 - x^2}$</a></li>
+        <li><a href="#ejemplo2">Ejemplo 2 — $\sqrt{a^2 + x^2}$</a></li>
+        <li><a href="#ejemplo3">Ejemplo 3 — $\sqrt{x^2 - a^2}$</a></li>
+        <li><a href="#ejercicios">Ejercicios</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1 id="introduccion">Sustitución trigonométrica — Concepto</h1>
+      <div class="meta">Objetivo: transformar radicales cuadráticos en expresiones trigonométricas más simples.</div>
+      <p>La sustitución trigonométrica es útil para resolver integrales que involucran expresiones como $\sqrt{a^2 - x^2}$, $\sqrt{a^2 + x^2}$ y $\sqrt{x^2 - a^2}$. Usamos identidades trigonométricas para simplificar la raíz y obtener integrales de funciones trigonométricas conocidas.</p>
+
+      <section id="casos">
+        <h2>Casos principales</h2>
+        <div class="math">
+          <ul>
+            <li>$\sqrt{a^2 - x^2} \Rightarrow x = a\sin\theta$</li>
+            <li>$\sqrt{a^2 + x^2} \Rightarrow x = a\tan\theta$</li>
+            <li>$\sqrt{x^2 - a^2} \Rightarrow x = a\sec\theta$</li>
+          </ul>
+        </div>
+        <p>Con estas sustituciones, el diferencial $dx$ también cambia y la integral puede reescribirse en términos de $\theta$.</p>
+      </section>
+
+      <section id="ejemplo1">
+        <h2>Ejemplo 1 — $\int \sqrt{a^2 - x^2}\,dx$</h2>
+        <div class="example">
+          <p>Usamos $x = a\sin\theta$, por lo tanto $dx = a\cos\theta\,d\theta$ y:</p>
+          <p>$\sqrt{a^2 - x^2} = a\cos\theta$</p>
+          <p>Entonces:</p>
+          <p>$\displaystyle \int \sqrt{a^2 - x^2}\,dx = \int a^2\cos^2\theta\,d\theta$</p>
+          <p>Aplicando la identidad $\cos^2\theta = \tfrac{1}{2}(1+\cos2\theta)$:</p>
+          <p>$= \tfrac{a^2}{2}\int (1+\cos2\theta)\,d\theta = \tfrac{a^2}{2}(\theta + \tfrac{1}{2}\sin2\theta) + C$</p>
+          <p>Finalmente, se regresa a $x$ usando $\theta = \arcsin(x/a)$.</p>
+        </div>
+      </section>
+
+      <section id="ejemplo2">
+        <h2>Ejemplo 2 — $\int \sqrt{a^2 + x^2}\,dx$</h2>
+        <div class="example">
+          <p>Usamos $x = a\tan\theta$, por lo tanto $dx = a\sec^2\theta\,d\theta$ y:</p>
+          <p>$\sqrt{a^2 + x^2} = a\sec\theta$</p>
+          <p>$\displaystyle \int \sqrt{a^2 + x^2}\,dx = \int a^2\sec^3\theta\,d\theta$</p>
+          <p>Recordando que $\int \sec^3\theta\,d\theta = \tfrac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|)$, se obtiene:</p>
+          <p>$= \tfrac{a^2}{2}\big(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|\big) + C$</p>
+          <p>Luego se regresa a $x$ usando $\tan\theta = x/a$.</p>
+        </div>
+      </section>
+
+      <section id="ejemplo3">
+        <h2>Ejemplo 3 — $\int \sqrt{x^2 - a^2}\,dx$</h2>
+        <div class="example">
+          <p>Usamos $x = a\sec\theta$, por lo tanto $dx = a\sec\theta\tan\theta\,d\theta$ y:</p>
+          <p>$\sqrt{x^2 - a^2} = a\tan\theta$</p>
+          <p>$\displaystyle \int \sqrt{x^2 - a^2}\,dx = a^2 \int \tan^2\theta\sec\theta\,d\theta$</p>
+          <p>Usamos $\tan^2\theta = \sec^2\theta - 1$ para integrar.</p>
+        </div>
+      </section>
+
+      <section id="ejercicios">
+        <h2>Ejercicios propuestos</h2>
+        <ol>
+          <li>$\int \frac{dx}{\sqrt{9 - x^2}}$</li>
+          <li>$\int \frac{x^2}{\sqrt{4 + x^2}}\,dx$</li>
+          <li>$\int \frac{\sqrt{x^2 - 16}}{x}\,dx$</li>
+        </ol>
+        <p class="card">Sugerencia: identifica el tipo de radical y elige la sustitución trigonométrica adecuada.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Hecho con ❤️ — Apuntes de sustitución trigonométrica.
+  </footer>
+</body>
+</html>
