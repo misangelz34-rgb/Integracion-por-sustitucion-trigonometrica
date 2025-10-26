@@ -49,10 +49,25 @@
 
     .math{background:#fff;border-left:4px solid #d1fae5;padding:8px 12px;border-radius:6px}
     footer{max-width:1100px;margin:18px auto 50px;color:var(--muted);font-size:14px;padding:0 24px}
+
+    /* Estilo del botón de la calculadora */
+    .boton-calculadora{
+      display:inline-block;
+      padding:12px 20px;
+      background-color:#059669;
+      color:white;
+      font-weight:600;
+      border-radius:8px;
+      text-decoration:none;
+      transition: background-color 0.3s;
+    }
+    .boton-calculadora:hover{
+      background-color:#047857;
+    }
   </style>
   <script>
     window.MathJax = {
-      tex: {inlineMath: [['$','$'], ['\\(','\\)']]},
+      tex: {inlineMath: [['$','$'], ['\\\\(','\\\\)']]},
       svg: {fontCache: 'global'}
     };
   </script>
@@ -79,6 +94,8 @@
         <li><a href="#ejemplo2">Ejemplo 2 — $\sqrt{a^2 + x^2}$</a></li>
         <li><a href="#ejemplo3">Ejemplo 3 — $\sqrt{x^2 - a^2}$</a></li>
         <li><a href="#ejercicios">Ejercicios</a></li>
+        <li><a href="#video">Video explicativo</a></li>
+        <li><a href="#calculadora">Calculadora para resolver integrales</a></li>
       </ul>
     </nav>
 
@@ -119,7 +136,7 @@
           <p>$\sqrt{a^2 + x^2} = a\sec\theta$</p>
           <p>$\displaystyle \int \sqrt{a^2 + x^2}\,dx = \int a^2\sec^3\theta\,d\theta$</p>
           <p>Recordando que $\int \sec^3\theta\,d\theta = \tfrac{1}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|)$, se obtiene:</p>
-          <p>$= \tfrac{a^2}{2}\big(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|\big) + C$</p>
+          <p>$= \tfrac{a^2}{2}(\sec\theta\tan\theta + \ln|\sec\theta + \tan\theta|) + C$</p>
           <p>Luego se regresa a $x$ usando $\tan\theta = x/a$.</p>
         </div>
       </section>
@@ -143,27 +160,31 @@
         </ol>
         <p class="card">Sugerencia: identifica el tipo de radical y elige la sustitución trigonométrica adecuada.</p>
       </section>
+
+      <!-- SECCIÓN VIDEO -->
       <section id="video">
-  <h2>Video explicativo</h2>
-  <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
-    <iframe 
-      src="https://drive.google.com/file/d/16XLcRlfiH8fdct0QOfXsnP1WgkOHkj8n/preview"
-      width="100%" height="480" allow="autoplay"
-      style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
-    </iframe>
-  </div>
-</section>
+        <h2>Video explicativo</h2>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;">
+          <iframe 
+            src="https://drive.google.com/file/d/16XLcRlfiH8fdct0QOfXsnP1WgkOHkj8n/preview"
+            width="100%" height="480" allow="autoplay"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;">
+          </iframe>
+        </div>
+      </section>
+
+      <!-- SECCIÓN CALCULADORA CON BOTÓN -->
       <section id="calculadora">
-  <h2>Calculadora para resolver integrales</h2>
-  <p>Si quieres practicar más integrales por sustitución trigonométrica, puedes usar esta calculadora en línea:</p>
-  <p>
-    <a href="https://es.symbolab.com/solver/trigonometric-substitution-integration-calculator?utm_source=chatgpt.com" target="_blank" 
-       style="color:#059669; font-weight:600; text-decoration:none;">
-       Symbolab – Calculadora de integrales por sustitución trigonométrica
-    </a>
-  </p>
-</section>
-      
+        <h2>Calculadora para resolver integrales</h2>
+        <p>Si quieres practicar más integrales por sustitución trigonométrica, puedes usar esta calculadora en línea:</p>
+        <p>
+          <a href="https://es.symbolab.com/solver/trigonometric-substitution-integration-calculator?utm_source=chatgpt.com" target="_blank"
+             class="boton-calculadora">
+             Abrir calculadora
+          </a>
+        </p>
+      </section>
+
     </main>
   </div>
 
@@ -172,3 +193,4 @@
   </footer>
 </body>
 </html>
+
